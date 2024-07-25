@@ -2,7 +2,8 @@
 import React from "react";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer, toast,Slide } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -26,12 +27,27 @@ const SignupSchema = Yup.object().shape({
     .required("This field is required"),
 });
 
+const toastOptions = {
+  position: "top-center",
+  autoClose: 5000,
+  hideProgressBar: false,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  transition: Slide,
+};
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-green-50 w rounded-xl">
       <div>
-        <div className="bg-white py-9 px-10 rounded-xl">
-          <h1>Contact us </h1>
+      <ToastContainer
+       {...toastOptions}
+
+      />
+        <div className="bg-white py-9 px-20 rounded-xl">
+          <h1 className="font-bold text-2xl pb-4">Contact Us </h1>
+          
           <Formik
             initialValues={{
               firstName: "",
@@ -42,76 +58,77 @@ export default function Home() {
             }}
             validationSchema={SignupSchema}
             onSubmit={(values) => {
-              alert(JSON.stringify(values));
+              toast.success('Form submitted successfully!');
             }}
           >
+            
             {({ errors, touched }) => (
               <Form className="w-full max-w-lg">
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label>First Name</label>
+                    <label className="text-sm ">First Name</label>
                     <Field
                       name="firstName"
-                      className="border-2 border-slate-400 rounded-md pb-4 px-2"
+                      className="border-2 border-slate-400 rounded-xl pb-4 px-2"
                     />
                     {errors.firstName && touched.firstName ? (
-                      <div>{errors.firstName}</div>
+                      <div className="text-sm text-red-600">{errors.firstName}</div>
                     ) : null}
                   </div>
 
                   <div className="w-full md:w-1/2 px-3 md:mb-0">
-                    <label>Last Name</label>
+                    <label className="text-sm ">Last Name</label>
                     <Field
                       name="lastName"
-                      className="border-2 border-slate-400 rounded-md pb-4 px-2"
+                      className="border-2 border-slate-400 rounded-xl rounded-xl2 pb-4 px-2"
                     />
                     {errors.lastName && touched.lastName ? (
-                      <div>{errors.lastName}</div>
+                      <div className="text-sm text-red-600" >{errors.lastName}</div>
                     ) : null}
                   </div>
                 </div>
 
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full md:w-1/2 px-3 md:mb-0">
-                    <label>Email Adress</label>
+                    <label className="text-sm ">Email Adress</label>
                     <Field
                       name="email"
                       type="email"
-                      className="border-2 border-slate-400 rounded-md pb-4 px-2"
+                      className="border-2 border-slate-400 rounded-xl pb-4 px-28 "
                     />
 
                     {errors.email && touched.email ? (
-                      <div>{errors.email}</div>
+                      <div className="text-sm text-red-600">{errors.email}</div>
                     ) : null}
                   </div>
                 </div>
-                <label> Query type</label>
+                <label className="text-sm "> Query type</label>
                 <div className="flex flex-wrap -mx-3 mb-6 space-x-4">
                   <br />
-                  <div className=" ps-8 px-14 pb-2 pt-2 border border-gray-400 rounded dark:border-gray-700 ">
-                    <Field name="picked" type="radio" value="General Enquery" />{" "}
-                    General Enquery
+                  <div className=" ps-8 px-14 rounded-xl pb-2 pt-2 border border-gray-400  dark:border-gray-700 ">
+                    <Field  name="picked" type="radio" value="General Enquery"  />{" "}
+                   <label className="text-sm ">General Enquery</label> 
                   </div>
                   
-                  <div className="ps-8 px-14 pb-2 pt-2 border border-gray-400 rounded dark:border-gray-700">
+                  <div className="ps-8 px-14 rounded-xl pb-2 pt-2 border border-gray-400  dark:border-gray-700">
                     <Field name="picked" type="radio" value="Support Request" />{" "}
-                    Support Request
+                    <label className="text-sm ">Support Request</label>   
                   </div>
                 
                   {errors.picked && touched.picked ? (
-                    <div>{errors.picked}</div>
+                    <div className="text-sm text-red-600">{errors.picked}</div>
                   ) : null}
                 </div>
                 <div className="flex flex-wrap -mx-3 mb-6">
                   <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-                    <label>Message</label>
+                    <label className="text-sm ">Message</label>
                     <Field
                       name="message"
                       type="textarea"
-                      className="border-2 border-slate-400 rounded-md px-32 pb-24"
+                      className="border-2 border-slate-400 rounded-xl px-32 pb-24"
                     />
                     {errors.message && touched.message ? (
-                      <div>{errors.message}</div>
+                      <div className="text-sm text-red-600">{errors.message}</div>
                     ) : null}
                     <br />
                   </div>
@@ -119,19 +136,20 @@ export default function Home() {
                 <div>
                   <div>
                     <Field type="checkbox" name="checked" />
-                    <label className="ps-4 px-8">I consent to beign contacted by the team</label>
+                    <label  className="ps-4 px-8 text-sm ">I consent to beign contacted by the team</label>
                     {errors.checked && touched.checked ? (
-                      <div>{errors.checked}</div>
+                      <div className="text-sm text-red-600  ">{errors.checked}</div>
                     ) : null}
                   </div>
                 </div>
                 <br />
-                <button className="bg-green-600 text-white font-bold py-2 px-52 rounded" type="submit">
+                <button className="bg-emerald-800 text-white font-bold py-4 px-56 rounded-xl text-sm" type="submit">
                   Submit
                 </button>
               </Form>
             )}
           </Formik>
+          
         </div>
       </div>
     </main>

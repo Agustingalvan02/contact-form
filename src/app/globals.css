@@ -1,7 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+@import url('https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap');
 :root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
@@ -10,6 +10,7 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
+    font-family: Karla, sans-serif;
     --foreground-rgb: 255, 255, 255;
     --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0;
@@ -18,6 +19,7 @@
 
 body {
   color: rgb(var(--foreground-rgb));
+  font-family: var(--font-sans);
   background: linear-gradient(
       to bottom,
       transparent,

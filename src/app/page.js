@@ -4,8 +4,7 @@ import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { ToastContainer, toast, Slide } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { svg } from "react-svg";
-import successIcon from "../../public/images/icon-success-check.svg";
+import { FaCheckCircle } from 'react-icons/fa';
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -51,22 +50,29 @@ export default function Home() {
             initialValues={{
               firstName: "",
               lastName: "",
+              message:"",
               email: "",
               picked: "",
               checked: "",
             }}
             validationSchema={SignupSchema}
-            onSubmit={(values) => {
+            onSubmit={(values,{resetForm}) => {
               toast.success(
+                <div className="flex items-center">
+                  <FaCheckCircle className="mr-2 text-white" style={{ width: '24px', height: '24px' }} />
                 <div>
+                  
                   <span className="font-bold">Message Sent!</span>
                   <br />
                   <small className>
                     Thank you for completing the form. We'll be in touch soon!
                   </small>
 
-                </div>,
+                </div>
+                </div>
+                ,
                 {
+                  icon: false,
                   style: {
                     fontFamily: "Open Sans, sans-serif",
                     width: "430px",
@@ -78,6 +84,7 @@ export default function Home() {
                   },
                 }
               );
+             resetForm();
             }}
           >
             {({ errors, touched }) => (

@@ -10,10 +10,13 @@ module.exports = {
       sans: ["Karla", "sans-serif"],
     },
     extend: {
+      screens: {
+        mobile: "375px",
+        desktop: "1440px",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
   },
